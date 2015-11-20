@@ -4,6 +4,11 @@ import cv2
 import cv2.cv as cv
 import os
 
+# Program that takes in a video file and opens, reads it.
+# Generates a tool bar for annotating objects/attributes of interest.
+# All annotations (switch activity by human user) gets recorded in a numpy array file.
+# Products get saved once program is terminated.
+
 os.chdir('/home/james/Desktop/JamesResearch/EndoscopicVideos')
 video_name = 'video06.mp4'
 outfile_name = 'video06_numpy_rough.npy'

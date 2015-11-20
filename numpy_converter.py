@@ -4,6 +4,10 @@ import cv2
 import matplotlib.pyplot as plt
 import cv2.cv as cv
 
+# Takes in rough annoation file with specific frame numbers
+# and converts it into sequence of 0s and 1s.
+# 0 indicates the absence of an attribute while 1 indicates the presence.
+
 infile_name = 'video06_numpy_rough.npy'
 outfile_name = 'video06_numpy_refined.npy'
 outfile_text_name = 'video06_text_output_refined.txt'

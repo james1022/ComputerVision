@@ -1,3 +1,6 @@
+# All code from line 4 should be copied and pasted
+# and run on an ipython terminal.
+
 import numpy as np
 import matplotlib.pylab as pylab
 import matplotlib.cm as cm
