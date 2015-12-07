@@ -1,12 +1,10 @@
-# All code from line 4 should be copied and pasted
-# and run on an ipython terminal.
-
 import numpy as np
-import matplotlib.pylab as pylab
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+from matplotlib.pylab import *
 
-infile_name = 'video06_numpy_refined.npy'
+infile_name = 'video07_numpy_refined.npy'
+outfile_name = 'video07_plot.jpg'
 
 X = np.load(infile_name)
 n_attributes, length = X.shape
@@ -20,4 +18,5 @@ for i in range(10):
 
 pylab.imshow(X_colored, interpolation="nearest")
 pylab.axis("tight")
-pylab.show()
+savefig("/home/james/Desktop/JamesResearch/EndoscopicVideos/" + outfile_name)
+# pylab.show()

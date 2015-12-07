@@ -4,13 +4,11 @@ import cv2
 import matplotlib.pyplot as plt
 import cv2.cv as cv
 
-# Takes in rough annoation file with specific frame numbers
-# and converts it into sequence of 0s and 1s.
-# 0 indicates the absence of an attribute while 1 indicates the presence.
-
-infile_name = 'video06_numpy_rough.npy'
-outfile_name = 'video06_numpy_refined.npy'
-outfile_text_name = 'video06_text_output_refined.txt'
+infile_name = 'video01_numpy_rough.npy'
+outfile_name = 'video01_numpy_refined.npy'
+outfile_text_name = 'video01_text_output_refined.txt'
+outfile_name_trimmed = 'video01_numpy_refined_trimmed.npy'
+outfile_text_name_trimmed = 'video01_text_output_refined_trimmed.txt'
 
 array_rough = np.load(infile_name, mmap_mode = 'r')
 n_attributes, length = array_rough.shape
@@ -47,5 +45,18 @@ for i in range(0, n_attributes):
 				else:
 					refined[i, k] = 0
 
+newLen = length / 25
+s2 = (n_attributes, newLen)
+refined2 = np.zeros(s2)
+
+for i in range(0, n_attributes):
+	count = 1
+	for j in range(0, newLen):
+		if count * 25 <= length:
+			refined2[i, j] = refined[i, count * 25]
+			count += 1
+
 np.save(outfile_name, refined)
 np.savetxt(outfile_text_name, refined)
+np.save(outfile_name_trimmed, refined2)
+np.savetxt(outfile_text_name_trimmed, refined2)

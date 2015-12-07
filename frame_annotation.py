@@ -4,15 +4,11 @@ import cv2
 import cv2.cv as cv
 import os
 
-# Program that takes in a video file and opens, reads it.
-# Generates a tool bar for annotating objects/attributes of interest.
-# All annotations (switch activity by human user) gets recorded in a numpy array file.
-# Products get saved once program is terminated.
-
 os.chdir('/home/james/Desktop/JamesResearch/EndoscopicVideos')
-video_name = 'video06.mp4'
-outfile_name = 'video06_numpy_rough.npy'
-outfile_text_name = 'video06_text_output_rough.txt'
+# os.chdir('/media/james_external_drive/Research_backup/video_files')
+video_name = 'video01.mp4'
+outfile_name = 'video01_numpy_rough.npy'
+outfile_text_name = 'video01_text_output_rough.txt'
 video = cv2.VideoCapture(video_name)
 length = int(video.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT))
 coordinates = []
@@ -150,8 +146,8 @@ def main(argv):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    np.save(outfile_name, annotation)
-    np.savetxt(outfile_text_name, annotation)
+#    np.save(outfile_name, annotation)
+#    np.savetxt(outfile_text_name, annotation)
     video.release()
     cv2.destroyAllWindows()
 

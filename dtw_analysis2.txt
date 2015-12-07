@@ -1,0 +1,96 @@
+Pancreas caused too much noise.
+As a result, I excluded the row that contains annotations on the pancreas and ran the algorithm again.
+This resulted in changing many of the min and max distance pairs.
+I thought that this was more meaningful.
+	Removing the pancreas row reduced the pairwise distances by a great amount 
+	(of course, removing any row would reduce the overall cost by a little)
+	Also, because the presence/absence of the pancreas tended to differ not depending on the 
+	current stage of the surgery but on how much the surgeon zoomed in with the camera
+	or the slightly different orientation of organs in different paitents, removing the
+	row with the pancreas annotations improved the accuracy of this model.
+	But there was one exceptional case: Zooming out usually brought in the pancreas into the frame.
+										Zooming out took the pancreas out of the frame.
+										And when the surgeons were in the "clip attaching stage",
+										they tended to zoom out for a while to capture the overall
+										scene and the clip tool approaching the gallbladder and
+										zoomed back in to focus on where to apply to clips.
+										So during this stage, the absence/presence (somewhat oscillatory)
+										of the pancreas does seem to matter, but this stage can be inferred
+										by the clip attribute and the clip tool attribute.
+										There is more to be lost than to be gained by keeping the pancreas row.
+
+So now, a new set of analyses based on the results I obtained after removing the pancreas row.
+
+Best Overall: video06_04 (0.1303)
+Worst Overall: video06_01 (0.3852)
+Since both use video06 as the input, analysis will be below at video06
+
+video01: best and worst are about twice the difference
+	Best: video05 (0.1939)
+		Analysis: not much difference except some parts where video 1 are oscillating are not in video5
+	Worst: video06 (0.3848)
+		Analysis: not much difference here either but some parts (e.g. attribute 0 from frames 1660-1900)
+				  are different for an extended amount of time. Thus the greater distance
+
+video02: 
+	Best: video05 (0.1962)
+		Analysis: Some difference in minor details (oscillating portions) but most of the main chunks are similar
+	Worst: video07 (0.2984)
+		Analysis: Some difference in how several attributes overlap with each other at different points in time
+				  (e.g. frames 1400 - 1600, 1200 - 1300)
+
+video03:
+	Best: video06 (0.1439)
+		Analysis: the two videos progress almost identically except for some differences where either one oscillates
+	Worst: video05 (0.2842)
+		Analysis: Not much difference except for the main chunks (attributes 1 and 2) in frame 820 - 1000
+
+video04:
+	Best: video06 (0.1446)
+		Analysis: not much difference here either. The two videos progress almost identically. 
+		(cf. video06_04 is the absolute best in the series, almost the same distance as this one)
+	Worst: video05 (0.3351)
+		Analysis: much differences for the main chunky attributes like 1, 2. (frames 1450 - 1950)
+				  Otherwise, similar.
+
+video05:
+	Best: video01 (0.1956)
+		Analysis: Some differences in minor attributes and oscillations.
+	Worst: video06 (0.3433)
+		Analysis: very differnt in attributes 0, 1, 2, 8 which are the chunky/important ones.
+				  More analysis on this on video06_05 analysis.
+			  	  (cf. video06_05 is the absolute worst in the series, almost same distance as this one)
+
+
+video06:
+	Best: video04 (0.1303)
+		Analysis: Almost identical. But! if we look at the original plottings of the two videos,
+				  we can see that they differ greatly on the duration of the retrieval stage.
+				  Such differences cannot be captured by DTW. There are minor differences with
+				  the clips attribute.
+	Worst: video05 (0.3469)
+		Analysis: The two videos differ in several chunky attributes: 1, 2, 8
+				  If 8 differs between videos, that probably means that they are different surgeons.
+				  Most procedures procede almost the same amongst different surgeons except for their
+				  clean-up style. Some surgeons like to clean while performing the surgery while
+				  some surgeons do all the cleaning in the end. So maybe, we can even just take
+				  attribute 8 (water) when trying to figure out if two surgeries were peformed by
+				  the same surgeon or at least if the surgeons in the two videos have similar
+				  styles with which they perform surgeries.
+
+video07:
+	Best: video06 (0.215)
+		Analysis: Chunky attributes are quite similar.
+	Worst: video05 (0.3519)
+		Analysis: Some differences in attribute 9: stylistic difference-->some surgeons place the 
+				  retrieval bag even before the gallbladder has been completely removed (video07).
+				  Morevover, oscillations in the minor attributes are also different.
+
+In cases where distances relatively huge, we can infer that the surgeons who performed the 
+surgeries in the two videos are different. (or if the surgeons were the same, one particular
+patient's conditions rendered the surgical procedures to be slightly different: e.g. gallbladder
+in videos 06 and 07 was extremely huge and the surgeon had trouble retrieving it outside the patient's body)
+For instance, video05_06 is the worst case for video05.
+We can see for the water attribute (row 8) that the surgeon in video06 applies water much before 
+the retrieval stage and by large amounts while the surgeon in video01 applies water very little
+and during almost near the end of the surgery.
